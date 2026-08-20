@@ -161,6 +161,8 @@ func (s *Service) RenewLicense(ctx context.Context, licenseID string, store Stor
 }
 
 func (s *Service) CompleteInspection(ctx context.Context, inspection Inspection, passScore int) (Inspection, error) {
+	inspection = inspectionVersionSnapshot(inspection)
+
 	if inspection.CompletedAt.Before(inspection.StartedAt) || inspection.CompletedAt.After(s.now()) {
 		return Inspection{}, fmt.Errorf("%w: inspection time range is invalid", ErrStoreNotCompliant)
 	}
