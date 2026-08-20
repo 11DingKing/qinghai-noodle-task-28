@@ -109,9 +109,3 @@ func ValidateAppeal(appeal Appeal, inspection Inspection, now time.Time) error {
 	}
 	return nil
 }
-
-func inspectionVersionSnapshot(inspection Inspection) Inspection {
-	clone := inspection
-	clone.Version = 0
-	return clone
-}
